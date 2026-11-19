@@ -1,17 +1,22 @@
 name: target
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       message:
-        description: Message from the source repo
+        type: string
         required: true
-      source_run:
-        description: Run URL that dispatched this
-        required: false
+    outputs:
+      artifact:
+        description: Name of the mock build artifact
+        value: ${{ jobs.build.outputs.artifact }}
 jobs:
-  echo:
+  build:
     runs-on: ubuntu-latest
+    outputs:
+      artifact: ${{ steps.mock.outputs.artifact }}
     steps:
-      - run: |
-          echo "message: ${{ inputs.message }}"
-          echo "from: ${{ inputs.source_run }}"
+      - id: mock
+        run: |
+          echo "mock build: ${{ inputs.message }}"
+          sleep 5
+          echo "artifact=app-${{ github.sha }}" >> "$GITHUB_OUTPUT"
