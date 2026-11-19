@@ -19,6 +19,7 @@ jobs:
         with:
           repository: yokeTH/dispatch-poc-target
           ref: main
+          token: ${{ secrets.TARGET_READ_TOKEN }}
       - run: cat message.txt
       - id: mock
         run: |
