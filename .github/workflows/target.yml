@@ -1,0 +1,17 @@
+name: target
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: Message from the source repo
+        required: true
+      source_run:
+        description: Run URL that dispatched this
+        required: false
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "message: ${{ inputs.message }}"
+          echo "from: ${{ inputs.source_run }}"
