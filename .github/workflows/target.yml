@@ -15,6 +15,11 @@ jobs:
     outputs:
       artifact: ${{ steps.mock.outputs.artifact }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: yokeTH/dispatch-poc-target
+          ref: main
+      - run: cat message.txt
       - id: mock
         run: |
           echo "mock build: ${{ inputs.message }}"
