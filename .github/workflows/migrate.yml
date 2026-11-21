@@ -1,5 +1,11 @@
 name: migrate
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      fail:
+        description: Simulate a failed migration
+        type: boolean
+        default: false
 jobs:
   migrate:
     runs-on: ubuntu-latest
@@ -7,4 +13,5 @@ jobs:
       - run: |
           echo "mock migration"
           sleep 20
+          if [ "${{ inputs.fail }}" = true ]; then echo "migration failed"; exit 1; fi
           echo "migration done"
