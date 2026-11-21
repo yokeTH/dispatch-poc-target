@@ -1,16 +1,10 @@
 name: migrate
-run-name: migrate ${{ inputs.id }}
-on:
-  workflow_dispatch:
-    inputs:
-      id:
-        description: Caller's correlation id
-        required: true
+on: workflow_dispatch
 jobs:
   migrate:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "mock migration ${{ inputs.id }}"
+          echo "mock migration"
           sleep 20
           echo "migration done"
